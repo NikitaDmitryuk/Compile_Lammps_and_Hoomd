@@ -19,4 +19,4 @@ Where:
 
 # Example
 
-```mpirun -np 8 singualrity exec --nv lmp_gpu.simg  -sf gpu -pk pgu 1 -i in.lj -l lj.log```
+```mpirun -np 8 singularity exec --nv lmp_gpu.simg  -sf gpu -pk pgu 1 -i in.lj -l lj.log```
