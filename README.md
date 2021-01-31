@@ -5,7 +5,7 @@ This is a Singularity container build on nvidia/cuda that runs LAMMPs with gpu a
 
 ## Building
 
-```sudo singularity build lmp_gpu.simg  lmp_gpu.def```
+```sudo singularity build --tmpdir /tmp lmp_gpu.simg  lmp_gpu.def```
 
 This will save the container to current working directory as lmp_gpu.simg
 
