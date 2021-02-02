@@ -24,7 +24,7 @@ docker run --runtime=nvidia --rm nvidia/cuda:10.2-devel-ubuntu18.04 nvidia-smi
 sudo docker run --rm --runtime=nvidia nvidia/cuda:10.2-devel-ubuntu18.04 nvcc --version
 ```
 
-### built image
+### build image
 
 ```shell
 docker build -t 'lammps_gpu:2020' .
