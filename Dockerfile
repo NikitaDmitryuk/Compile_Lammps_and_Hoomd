@@ -43,11 +43,11 @@ RUN cd lammps &&\
     -D PKG_USER-TALLY=on\
     -D PKG_GPU=on\
     -D GPU_API=cuda\
-    -D GPU_ARCH=sm_61\
+    -D GPU_ARCH=sm_35\
     ../cmake
 
 RUN cd /lammps/build &&\
-    make -j6
+    make -j$(nproc)
     
 RUN cd /lammps/build &&\
     make install
