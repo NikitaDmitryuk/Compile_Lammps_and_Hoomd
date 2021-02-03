@@ -1,22 +1,21 @@
 FROM nvidia/cuda:10.2-devel-ubuntu18.04
 
-LABEL maintainer="ssmns ssmns@outlook.com"
-LABEL version="1.0-beta"
-LABEL description="This is custom Docker Image for lammps-gpu package."
+ARG ARCH
 
 RUN apt-get -y update &&\
     apt-get -y install wget git cmake build-essential openmpi-bin openmpi-common openssh-client openssh-server libopenmpi2 libopenmpi-dev libpng-dev zlib1g-dev gfortran ffmpeg pkg-config cmake-data
+    
+RUN mkdir -p /home/lammps/
 
-# download and extract
-RUN git clone https://github.com/lammps/lammps.git lammps &&\
-    cd lammps &&\
-    git checkout stable
+WORKDIR /home/lammps/
 
+COPY /lammps /home/lammps/
 
-RUN cd lammps &&\
-    mkdir build &&\
-    cd build &&\
-    cmake -D CMAKE_INSTALL_PREFIX=/usr/local\
+RUN mkdir build && cd build 
+
+WORKDIR /home/lammps/build/
+
+RUN cmake -D CMAKE_INSTALL_PREFIX=/usr/local\
     -D CMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs\
     -D BIN2C=/usr/local/cuda/bin/bin2c\
     -D LAMMPS_MACHINE=gpu\
@@ -44,13 +43,11 @@ RUN cd lammps &&\
     -D PKG_GPU=on\
     -D GPU_API=cuda\
     -D BUILD_OMP=yes\
-    -D GPU_ARCH=sm_35\
+    -D GPU_ARCH=${ARCH}\
     ../cmake
 
-RUN cd /lammps/build &&\
-    make -j$(expr $(nproc) - 2)
+RUN make -j$(expr $(nproc) - 2)
     
-RUN cd /lammps/build &&\
-    make install
+RUN make install
 
 ENV PATH /usr/lib64/mpich/bin:${PATH}
