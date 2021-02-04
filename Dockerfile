@@ -18,7 +18,7 @@ WORKDIR /home/lammps/build/
 RUN cmake -D CMAKE_INSTALL_PREFIX=/usr/local\
     -D CMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs\
     -D BIN2C=/usr/local/cuda/bin/bin2c\
-    -D LAMMPS_MACHINE=gpu\
+    -D LAMMPS_MACHINE=mpi\
     -D PKG_MOLECULE=on\
     -D PKG_ASPHERE=on\
     -D PKG_BODY=on\
@@ -42,6 +42,7 @@ RUN cmake -D CMAKE_INSTALL_PREFIX=/usr/local\
     -D PKG_USER-TALLY=on\
     -D PKG_GPU=on\
     -D GPU_API=cuda\
+    -D BUILD_MPI=yes\
     -D BUILD_OMP=yes\
     -D GPU_ARCH=${ARCH}\
     ../cmake
@@ -51,3 +52,5 @@ RUN make -j$(expr $(nproc) - 2)
 RUN make install
 
 ENV PATH /usr/lib64/mpich/bin:${PATH}
+
+WORKDIR /srv/input
