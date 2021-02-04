@@ -63,7 +63,7 @@ nvidia-docker run -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
 
 После запуска контейнера в нем можно выполнять команды и запускать lammps.
 
-Примеры (пока работают не все и только на одном потоке) (gpu или mpi в зависимости от параметра LAMMPS_MACHINE в Dockerfile):
+Пример:
 
 ```shell
 lmp_g++_openmpi -sf gpu -pk gpu 1 -in in.file
