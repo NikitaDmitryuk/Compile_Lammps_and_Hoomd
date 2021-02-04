@@ -1,33 +1,74 @@
-# lammps_docker
-the molecular dynamics packages compiled with GPU supports . 
+# Lammps nvidia-docker
+
+***Docker*** позволяет создавать и запускать контейнеры со своей операционной системой и программами обособленно от компьютера, на котором запускается контейнер, соблюдая все зависимости и переменные среды. Это ускоряет развертывание программ на других компьютерах, так как не требуется устанавливать нужные зависимости, драйвера и тп.
 
 
-for compiling the Lammps packages need a base image ,because of own purpose ( use cuda for GPU processing )  install `nvidia/cuda` docker image. 
-``` 
-docker pull nvidia/cuda:10.2-devel-ubuntu18.04
+### Первоначальная настройка
+
+Для работы контейнера необходим ***docker*** и ***nvidia-docker*** версии 2.5 или выше.
+
+Перед использованием *docker* может понадобиться запустить службу:
+
+
+```shell
+sudo systemctl start docker
 ```
 
-two bellow commands must run perfectly without any error:
+Необходимо загрузить следующий контейнер:
 
+```shell
+sudo docker pull nvidia/cuda:10.2-devel-ubuntu18.04
 ```
+
+Следующие команды должны выполняться без ошибок:
+
+```shell
 docker run --runtime=nvidia --rm nvidia/cuda:10.2-devel-ubuntu18.04 nvidia-smi
 sudo docker run --rm --runtime=nvidia nvidia/cuda:10.2-devel-ubuntu18.04 nvcc --version
 ```
 
-### build image
+### Сборка образа
+
+В файле ***build_lammps.sh*** необходимо указать имя контейнера (*NAME_CONTAINER*), а также версию архитектуры видеокарты (*ARCH_GPU*).
+Дополнительные параметры компиляции можно изменить в ***Dockerfile***.
+
+Папка с исходным кодом с названием **lammps** или **жесткая ссылка** на нее должны находиться в одной папке со скриптом и Dockerfile (`lammps` можно скачать командой: `git clone --depth=1 --branch=stable https://github.com/lammps/lammps.git`).
+
+Запустить скрипт:
 
 ```shell
-docker build -t 'lammps_gpu:2020' .
+sudo ./build_lammps.sh
 ```
 
-### use image
+Данная команда создаст контейнер и скомпилирует в нем lammps, который находится в папке `/lammps` в текущей директории.
+
+Собранный контейнер с названием *NAME_CONTAINER* хранится на компьютере, и не требует повторной сборки, его можно использовать из любой директории.
+
+### Использование образа
+
+Для запуска контейнера с установленным *lammps*:
 
 ```shell
-nvidia-docker run -ti -v $(pwd):/srv/input -v $HOME/scratch:/srv/scratch lammps_gpu:2020
+nvidia-docker run -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
+```
 
-lmp_gpu -in /srv/lammps/bench/in.lj
+Данная команда запускает контейнер с названием **NAME_CONTAINER**. Ключ *-v $(pwd):/home/user_lammps/input* задает папку на компьютере, доступную контейнеру (путь до двоеточия), а в контейнере это будет путь, указанный после двоеточия.
 
-mpirun -np 4 lmp_gpu -in /srv/lammps/bench/in.lj
+В данном случае контейнеру будет доступна папка, из которой запускается контейнер, а в контейнере все файлы будут лежать в */home/user_lammps/input*.
 
-mpirun -np 4 lmp_gpu -in /srv/lammps/bench/in.lj -sf gpu
+После запуска контейнера в нем можно выполнять команды и запускать lammps.
+
+Примеры (пока работают не все и только на одном потоке) (gpu или mpi в зависимости от параметра LAMMPS_MACHINE в Dockerfile):
+
+```shell
+
+lmp_gpu -in in.lj
+
+lmp_mpi -in in.lj
+
+lmp_gpu -sf gpu -pk gpu 1 -in in.lj
+
+mpirun -np 4 lmp_gpu -in in.lj
+
+mpirun -np 4 lmp_gpu -in in.lj -sf gpu
 ```
