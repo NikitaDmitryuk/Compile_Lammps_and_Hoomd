@@ -66,8 +66,5 @@ nvidia-docker run -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
 Примеры (пока работают не все и только на одном потоке) (gpu или mpi в зависимости от параметра LAMMPS_MACHINE в Dockerfile):
 
 ```shell
-lmp_gpu -in in.lj
-lmp_mpi -in in.lj
-lmp_gpu -sf gpu -pk gpu 1 -in in.lj
-mpirun -np 4 lmp_gpu -in in.lj -sf gpu
+lmp_g++_openmpi -sf gpu -pk gpu 1 -in in.file
 ```
