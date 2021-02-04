@@ -26,7 +26,7 @@ WORKDIR /home/${USER_NAME}/lammps/build/
 RUN cmake -D CMAKE_INSTALL_PREFIX=/usr/local\
     -D CMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs\
     -D BIN2C=/usr/local/cuda/bin/bin2c\
-    -D LAMMPS_MACHINE=mpi\
+    -D LAMMPS_MACHINE=g++_openmpi\
     -D PKG_MOLECULE=on\
     -D PKG_ASPHERE=on\
     -D PKG_BODY=on\
@@ -65,5 +65,3 @@ ENV PATH /usr/lib64/mpich/bin:${PATH}
 WORKDIR /home/${USER_NAME}/input
 
 USER ${USER_NAME}
-
-RUN export OMP_NUM_THREADS=$(expr $(nproc) - 2)
