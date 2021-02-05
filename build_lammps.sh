@@ -1,7 +1,7 @@
 #! /bin/sh
 
 NAME_CONTAINER='lammps_mpi_test'
-ARCH_GPU="sm_61"
+ARCH_GPU='sm_61'
 
 systemctl start docker
 
