@@ -10,7 +10,7 @@ Github repository: [Lammps_compile_gpu_env](https://github.com/NikitaDmitryuk/La
 
 ### Первоначальная настройка
 
-Для работы контейнера необходиы драйвера ***nvidia***, ***docker*** и ***[nvidia-docker](https://github.com/NVIDIA/nvidia-docker)*** версии 2.5 или выше.
+Для работы контейнера необходиы ***драйвера nvidia***, ***docker*** и ***[nvidia-docker](https://github.com/NVIDIA/nvidia-docker)*** версии 2.5 или выше.
 
 Перед использованием *docker* может понадобиться запустить службу:
 
