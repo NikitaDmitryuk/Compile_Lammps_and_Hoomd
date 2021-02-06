@@ -74,6 +74,8 @@ nvidia-docker run --rm -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
 lmp_g++_openmpi -sf gpu -pk gpu 1 -in in.file
 ```
 
+Для выхода из контейнера можно использовать комбинацию клавиш `ctrl + d`.
+
 ## Изменение потенциала взаимодействия
 
 При расчете на видеокарте используется потенциал, находящийся в файле исходников *lammps* по адресу */lib/gpu/lal_lj.cu*.
