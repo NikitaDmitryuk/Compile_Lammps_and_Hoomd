@@ -59,7 +59,7 @@ sudo ./build_lammps.sh
 Для запуска контейнера с установленным *lammps*:
 
 ```shell
-nvidia-docker run -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
+nvidia-docker run --rm -ti -v $(pwd):/home/user_lammps/input NAME_CONTAINER
 ```
 
 Команда запускает контейнер с названием **NAME_CONTAINER**. Ключ *-v $(pwd):/home/user_lammps/input* задает папку на компьютере, доступную контейнеру (путь до двоеточия), а в контейнере это будет путь, указанный после двоеточия.
