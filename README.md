@@ -95,13 +95,10 @@ numtyp force = r2inv*r6inv*(lj1[mtype].x*r6inv-lj1[mtype].y);
 
 Для использования этого потенциала в моделировании *in.file* должен содержать следующие строки:
 
-    .
-    .
+    ...
     package gpu 1
-    .
-    .
+    ...
     pair_style lj/cut ${Rc}
-    .
-    .
+    ...
 
 *Lammps* необходимо запускать с ключами `-sf gpu -pk gpu 1`.
