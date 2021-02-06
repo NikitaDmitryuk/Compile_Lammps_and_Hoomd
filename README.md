@@ -91,3 +91,17 @@ numtyp force = r2inv*r6inv*(lj1[mtype].x*r6inv-lj1[mtype].y);
 
 После чего необходимо заново скомпилировать *lammps* (пункт [сборки образа](https://github.com/NikitaDmitryuk/Lammps_compile_gpu_env/blob/main/README.md#%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0)).
 
+***
+
+Для использования этого потенциала при моделировании *in.file* должен содержать следующие строки:
+
+    .
+    .
+    include gpu 1
+    .
+    .
+    pair_style	lj/cut ${Rc}
+    .
+    .
+
+*Lammps* необходимо запускать с ключами `-sf gpu -pk gpu 1`.
