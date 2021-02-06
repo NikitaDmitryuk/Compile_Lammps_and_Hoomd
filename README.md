@@ -40,7 +40,7 @@ sudo docker run --rm --runtime=nvidia nvidia/cuda:10.2-devel-ubuntu18.04 nvcc --
 В файле ***build_lammps.sh*** необходимо указать имя контейнера (*NAME_CONTAINER*), а также версию [архитектуры видеокарты](https://ru.wikipedia.org/wiki/CUDA) (*ARCH_GPU*).
 Дополнительные параметры компиляции можно изменить в ***Dockerfile***.
 
-Папка с исходным кодом с названием **lammps** или **жесткая ссылка** на нее должны находиться в одной папке со скриптом и Dockerfile (*lammps* можно скачать командой: `git clone --depth=1 --branch=stable https://github.com/lammps/lammps.git`).
+Папка с исходным кодом с названием **lammps** или **жесткая ссылка** на нее должны находиться в одной папке со скриптом и Dockerfile (*lammps* можно скачать командой: `git clone  --branch=stable https://github.com/lammps/lammps.git`).
 
 Запустить скрипт:
 
