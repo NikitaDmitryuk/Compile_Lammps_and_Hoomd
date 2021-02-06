@@ -1,6 +1,8 @@
 # Lammps nvidia-docker
 
-Автор: [Никита Дмитрюк](https://github.com/NikitaDmitryuk)
+Autor: [Никита Дмитрюк](https://github.com/NikitaDmitryuk)
+
+Laboratory: [Soft Matter Group, Bauman MSTU](http://teratech.ru/en)
 
 Github repository: [Lammps_compile_gpu_env](https://github.com/NikitaDmitryuk/Lammps_compile_gpu_env)
 
