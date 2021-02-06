@@ -1,6 +1,6 @@
 # Lammps nvidia-docker
 
-Autor: [Никита Дмитрюк](https://github.com/NikitaDmitryuk)
+Autor: [Dmitryuk Nikita](https://github.com/NikitaDmitryuk)
 
 Laboratory: [Soft Matter Group, Bauman MSTU](http://teratech.ru/en)
 
