@@ -1,3 +1,4 @@
+# Lammps nvidia-docker
 
 Autor: [Dmitryuk Nikita](https://github.com/NikitaDmitryuk)
 
@@ -6,8 +7,6 @@ Laboratory: [Soft Matter Group, Bauman MSTU](http://teratech.ru/en)
 Github repository: [Lammps_compile_gpu_env](https://github.com/NikitaDmitryuk/Lammps_compile_gpu_env)
 
 ---
-
-# Lammps nvidia-docker
 
 ***Docker*** позволяет создавать и запускать контейнеры со своей операционной системой и программами обособленно от компьютера, на котором запускается контейнер, соблюдая все зависимости и переменные среды. Это ускоряет развертывание программ на других компьютерах, так как не требуется устанавливать нужные зависимости и программы.
 
