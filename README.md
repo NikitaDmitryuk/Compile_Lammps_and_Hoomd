@@ -22,7 +22,7 @@ Github repository: [Lammps_compile_gpu_env](https://github.com/NikitaDmitryuk/La
 sudo systemctl start docker
 ```
 
-Необходимо загрузить следующий контейнер (в независимости от операционной системы на пк):
+Необходимо загрузить следующий контейнер (вне зависимости от операционной системы на пк):
 
 ```shell
 sudo docker pull nvidia/cuda:10.2-devel-ubuntu18.04
