@@ -1,10 +1,13 @@
-# Lammps nvidia-docker
 
 Autor: [Dmitryuk Nikita](https://github.com/NikitaDmitryuk)
 
 Laboratory: [Soft Matter Group, Bauman MSTU](http://teratech.ru/en)
 
 Github repository: [Lammps_compile_gpu_env](https://github.com/NikitaDmitryuk/Lammps_compile_gpu_env)
+
+---
+
+# Lammps nvidia-docker
 
 ---
 
@@ -37,7 +40,7 @@ sudo docker run --rm --runtime=nvidia nvidia/cuda:10.2-devel-ubuntu18.04 nvcc --
 
 ## Сборка образа
 
-В файле ***build_lammps.sh*** необходимо указать имя контейнера (*NAME_CONTAINER*), а также версию [архитектуры видеокарты](https://ru.wikipedia.org/wiki/CUDA) (*ARCH_GPU*).
+В файле ***build_lammps_docker.sh*** необходимо указать имя контейнера (*NAME_CONTAINER*), а также версию [архитектуры видеокарты](https://ru.wikipedia.org/wiki/CUDA) (*ARCH_GPU*).
 Дополнительные параметры компиляции можно изменить в ***Dockerfile***.
 
 Папка с исходным кодом с названием **lammps** или **жесткая ссылка** на нее должны находиться в одной папке со скриптом и Dockerfile (*lammps* можно скачать командой: `git clone  --branch=stable https://github.com/lammps/lammps.git`).
@@ -45,14 +48,14 @@ sudo docker run --rm --runtime=nvidia nvidia/cuda:10.2-devel-ubuntu18.04 nvcc --
 Запустить скрипт:
 
 ```shell
-sudo ./build_lammps.sh
+sudo ./build_lammps_docker.sh
 ```
 
 Это создаст контейнер и скомпилирует в нем lammps, который находится в папке ***/lammps в текущей директории***.
 
 Собранный контейнер с названием *NAME_CONTAINER* хранится на компьютере, и не требует повторной сборки, его можно использовать из любой директории.
 
-Список всех образов можно получить командой `sudo docker images`.
+Список всех образов можно получить командой \``sudo docker images`\`.
 
 ## Использование образа
 
@@ -76,7 +79,62 @@ lmp_g++_openmpi -sf gpu -pk gpu 1 -in in.file
 
 Для выхода из контейнера можно использовать комбинацию клавиш `ctrl + d`.
 
-## Изменение потенциала взаимодействия
+---
+
+# Lammps CMake build
+
+---
+
+Поместить файл ***build_lammps_cmake.sh*** в одну директорию с папкой *lammps*. В файле параметр ***gpu_arch*** отвечает за [архитектуру видеокарты](https://ru.wikipedia.org/wiki/CUDA).
+
+Компиляция *lmp_g++_openmpi* выполняется командой:
+
+```shell
+bash build_lammps_cmake.sh
+```
+
+Исполняемый файл *lmp_g++_openmpi* появится в папе *build*. Символьная ссылка на него помещается в папку с моделированием.
+
+
+---
+
+# Hoomd-blue CMake build
+
+---
+
+***Hoomd-blue*** является библиотекой python. Для удобства использования нескольких разных скомпилированных библиотек используется [Anaconda3](https://docs.anaconda.com/anaconda/install/linux/).
+
+В строчках в файле ***build_hoomd.sh*** необходимо указать имя окружения и путь до *Anaconda3* соответственно.
+
+```shell
+name_env="EnvName"
+anaconda_path=$HOME/anaconda3
+```
+
+Запуск компиляции из папки с исходниками и скриптом:
+
+```shell
+bash build_hoomd.sh
+```
+
+После компиляции библиотека автоматически устанавливается в окружение с названием *name_env="EnvName"*.
+
+Для ее использования необходимо активировать нужную среду *Anaconda3*:
+
+```shell
+conda activate "name_env"
+```
+
+После этого библиотеку можно использовать импортитировав в python:
+
+```python
+import hoomd as hd
+```
+---
+
+# Изменение потенциала взаимодействия в Lammps
+
+---
 
 При расчете на видеокарте используется потенциал, находящийся в файле исходников *lammps* по адресу */lib/gpu/lal_lj.cu*.
 
