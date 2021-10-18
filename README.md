@@ -104,7 +104,17 @@ bash build_lammps_cmake.sh
 
 ***Hoomd-blue*** является библиотекой python. Для удобства использования нескольких разных скомпилированных библиотек используется [Anaconda3](https://docs.anaconda.com/anaconda/install/linux/).
 
-Для вывода dump-файлов в формате *.lammpstrj* необходимо поместить файлы *HOOMDDumpWriter.cc* и *HOOMDDumpWriter.h* находящиеся в папке *hoomd/deprecated* в аналогичную папку в *hoomd* с заменой, и отредактировать их для нужного вывода.
+##Dump в формате .lammpstrj
+
+Для вывода dump-файлов в формате *.lammpstrj* необходимо поместить файлы *HOOMDDumpWriter.cc* и *HOOMDDumpWriter.h* находящиеся в папке *hoomd/deprecated* в аналогичную папку в *hoomd* с заменой, и отредактировать их для нужного вывода. 
+
+После компиляции использовать команду: 
+
+```python
+dump.xml(group=hoomd.group.all(), filename="dump", period=100, type=True)
+```
+
+##Компиляция
 
 В строчках в файле ***build_hoomd.sh*** необходимо указать имя окружения и путь до *Anaconda3* соответственно.
 
