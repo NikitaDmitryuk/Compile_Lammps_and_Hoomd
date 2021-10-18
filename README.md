@@ -142,9 +142,11 @@ conda activate "name_env"
 
 ---
 
-# Изменение потенциала взаимодействия в Lammps
+# Изменение потенциала взаимодействия
 
 ---
+
+## Lammps
 
 При расчете на видеокарте используется потенциал, находящийся в файле исходников *lammps* по адресу */lib/gpu/lal_lj.cu*.
 
@@ -174,3 +176,9 @@ numtyp force = r2inv*r6inv*(lj1[mtype].x*r6inv-lj1[mtype].y);
     ...
 
 *Lammps* необходимо запускать с ключами `-sf gpu -pk gpu 1`.
+
+## Hoomd-blue
+
+Исходники [потенциалов](https://hoomd-blue.readthedocs.io/en/v2.9.7/module-md-pair.html) Hoomd находятся в папке *\hoomd\md* c названиями ***EvaluatorPair\*.h***.
+
+Все числовые типы данных должны быть заданы как ***Scalar(число)***.
