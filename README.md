@@ -126,7 +126,7 @@ anaconda_path=$HOME/anaconda3
 Запуск компиляции из папки с исходниками и скриптом:
 
 ```shell
-bash build_hoomd.sh
+bash build_hoomd.sh 2> log.txt
 ```
 
 После компиляции библиотека автоматически устанавливается в окружение с названием *name_env="EnvName"*.
